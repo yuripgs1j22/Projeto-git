@@ -237,39 +237,44 @@
 
     <!-- JavaScript -->
     <script>
-        let cart = [];
+       <!-- Adicionando os produtos no carrinho -->
 
-        function addToCart(item) {
-            cart.push(item);
-            updateCart();
-        }
+  {
+        // Recupera o carrinho do localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        function updateCart() {
-            const cartCount = document.getElementById("cart-count");
-            const cartList = document.getElementById("cart-list");
+        // Adiciona o item ao carrinho
+        cart.push(productName);
 
-            // Atualiza a contagem no ícone do carrinho
-            cartCount.textContent = cart.length;
+        // Salva novamente no localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
 
-            // Exibe os itens do carrinho
-            cartList.innerHTML = '';
-            cart.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.classList.add('cart-item');
-                listItem.textContent = item;
-                cartList.appendChild(listItem);
-            });
-        }
+        // Exibe uma mensagem de sucesso
+        alert(`${productName} foi adicionado ao carrinho.`);
+    }
 
-        // Função para redirecionar para a página de checkout
-        function goToCart() {
-            if (cart.length > 0) {
-                // Simula redirecionamento para página de checkout
-                window.location.href = "checkout.html";  // Redireciona para página de compra (checkout)
-            } else {
-                alert("Carrinho vazio. Adicione itens para continuar.");
-            }
-        }
+    // Exemplo de uso: Para cada botão de "Adicionar ao Carrinho", vincule a função
+    document.getElementById('add-esfirra').addEventListener('click', function() {
+        addToCart('Esfirra');
+    });
+
+    document.getElementById('add-pao-doce').addEventListener('click', function() {
+        addToCart('Pão doce');
+    });
+
+    document.getElementById('add-bolos').addEventListener('click', function() {
+        addToCart('Bolos');
+    });
+
+    document.getElementById('add-croissant').addEventListener('click', function() {
+        addToCart('Croissant');
+    });
+
+    document.getElementById('add-biscoito').addEventListener('click', function() {
+        addToCart('Biscoito de goiabada');
+    });
+
+
     </script>
 </body>
 </html>
