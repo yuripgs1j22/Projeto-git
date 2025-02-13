@@ -1,0 +1,12 @@
+/* CSS para centralizar o carrossel */
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; /* Altura total da tela */
+  }
+
+  #carouselExampleSlidesOnly {
+    
+    width: 40%; /* Ajuste a largura conforme necessário */
+  }
