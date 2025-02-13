@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .cart-item {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .checkout-summary {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-confirm {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .btn-confirm:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Pagina Principal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Produtos.html">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="agendamento.html">Agendamento</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Checkout Container -->
+    <div class="container">
+        <h2 class="text-center mb-4">Finalizar Compra</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="checkout-summary">
+                    <h4>Resumo do Carrinho</h4>
+                    <ul id="cart-list" class="list-unstyled">
+                        <!-- Itens do Carrinho serão exibidos aqui -->
+                    </ul>
+                    <hr>
+                    <h5>Total: <span id="total-price">R$ 0,00</span></h5>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="checkout-summary">
+                    <h4>Dados de Envio</h4>
+                    <form id="checkout-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <button type="submit" class="btn btn-confirm">Confirmar Compra</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2025 Todos os direitos reservados. Meu site - Desenvolvido com <3</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script>
+        // Array para armazenar os itens do carrinho
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartList = document.getElementById('cart-list');
+        const totalPriceElement = document.getElementById('total-price');
+
+        // Função para atualizar a lista de itens no carrinho e o preço total
+        function updateCart() {
+            // Limpa a lista de itens no carrinho
+            cartList.innerHTML = '';
+
+            // Adiciona os itens na lista de checkout
+            let totalPrice = 0;
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('cart-item');
+                listItem.textContent = item;
+                cartList.appendChild(listItem);
+
+                // Simulação de preço para os itens
+                totalPrice += 10; // Preço fixo para o exemplo
+            });
+
+            // Atualiza o preço total
+            totalPriceElement.textContent = `R$ ${totalPrice.toFixed(2)}`;
+        }
+
+        // Função para submeter o formulário de compra
+        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Compra realizada com sucesso!');
+            // Limpar o carrinho após a compra
+            localStorage.removeItem('cart');
+            window.location.href = "Produtos.html"; // Redirecionar para a página de produtos
+        });
+
+        // Chama a função para atualizar o carrinho
+        updateCart();
+    </script>
+</body>
+</html>
