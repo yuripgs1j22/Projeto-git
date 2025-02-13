@@ -95,6 +95,31 @@
             height: 100%;
             object-fit: cover;
         }
+
+        /* Ajustes para responsividade */
+        @media (max-width: 1200px) {
+            .card-columns {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .card-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-columns {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -235,46 +260,42 @@
     <!-- Ícones Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 
-    <!-- JavaScript -->
     <script>
        <!-- Adicionando os produtos no carrinho -->
+       function addToCart(productName) {
+            // Recupera o carrinho do localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-  {
-        // Recupera o carrinho do localStorage
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            // Adiciona o item ao carrinho
+            cart.push(productName);
 
-        // Adiciona o item ao carrinho
-        cart.push(productName);
+            // Salva novamente no localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
 
-        // Salva novamente no localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
+            // Exibe uma mensagem de sucesso
+            alert(`${productName} foi adicionado ao carrinho.`);
+        }
 
-        // Exibe uma mensagem de sucesso
-        alert(`${productName} foi adicionado ao carrinho.`);
-    }
+        // Exemplo de uso: Para cada botão de "Adicionar ao Carrinho", vincule a função
+        document.getElementById('add-esfirra').addEventListener('click', function() {
+            addToCart('Esfirra');
+        });
 
-    // Exemplo de uso: Para cada botão de "Adicionar ao Carrinho", vincule a função
-    document.getElementById('add-esfirra').addEventListener('click', function() {
-        addToCart('Esfirra');
-    });
+        document.getElementById('add-pao-doce').addEventListener('click', function() {
+            addToCart('Pão doce');
+        });
 
-    document.getElementById('add-pao-doce').addEventListener('click', function() {
-        addToCart('Pão doce');
-    });
+        document.getElementById('add-bolos').addEventListener('click', function() {
+            addToCart('Bolos');
+        });
 
-    document.getElementById('add-bolos').addEventListener('click', function() {
-        addToCart('Bolos');
-    });
+        document.getElementById('add-croissant').addEventListener('click', function() {
+            addToCart('Croissant');
+        });
 
-    document.getElementById('add-croissant').addEventListener('click', function() {
-        addToCart('Croissant');
-    });
-
-    document.getElementById('add-biscoito').addEventListener('click', function() {
-        addToCart('Biscoito de goiabada');
-    });
-
-
+        document.getElementById('add-biscoito').addEventListener('click', function() {
+            addToCart('Biscoito de goiabada');
+        });
     </script>
 </body>
 </html>
