@@ -4,25 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto git</title>
+    <title>Projeto Git</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-        /* Ajusta o carrossel para que ele seja mais largo */
-        .carousel {
-            max-width: 900px; /* Largura máxima do carrossel */
-            margin: 0 auto; /* Centraliza o carrossel */
-        }
-
-        .carousel-inner {
-            height: 400px; /* Define uma altura maior para os slides */
-        }
-
-        .carousel-item img {
-            height: 100%; /* Assegura que a imagem preencha o slide */
-            object-fit: cover; /* Faz com que a imagem ocupe toda a área do slide */
-        }
-
         /* Estilo adicional para os cards */
         .card-columns {
             display: grid;
@@ -33,9 +18,43 @@
 
         .card {
             height: 100%;
+            transition: transform 0.3s ease;
         }
 
-        /* Estilo do rodapé */
+        .card:hover {
+            transform: translateY(-10px); /* Efeito de salto */
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Botão de Compra */
+        .btn-buy {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .btn-buy:hover {
+            background-color: #218838;
+        }
+
+        /* Carrinho de compras no navbar */
+        .cart-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
         footer {
             background-color: #f8f9fa;
             padding: 20px 0;
@@ -46,43 +65,63 @@
         footer p {
             margin-bottom: 0;
         }
+
+        .cart-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .cart-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .cart-item {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        /* Ajuste para carrossel menor */
+        .carousel {
+            max-width: 700px; /* Largura reduzida */
+            margin: 0 auto;
+        }
+
+        .carousel-inner {
+            height: 250px; /* Menor altura */
+        }
+
+        .carousel-item img {
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Pagina principal</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Produtos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="agendamento.html">agendamento</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Link
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <a class="navbar-brand" href="#">Pagina Principal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Produtos.html">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="agendamento.html">Agendamento</a>
+                    </li>
                 </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <!-- Ícone de Carrinho -->
+                <a href="#" class="text-dark cart-icon" id="cart-icon" onclick="goToCart()">
+                    <i class="bi bi-cart-fill"></i> Carrinho (<span id="cart-count">0</span>)
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -128,59 +167,109 @@
 
     <!-- Cards -->
     <div class="container">
-      <div class="card-columns">
-        <!-- Card 1 -->
-        <div class="card">
-          <img src="foto 2.jpg" class="card-img-top" alt="Card image 1">
-          <div class="card-body">
-            <h5 class="card-title">Esfirra </h5>
-            <p class="card-text">Muito gostosas e tem diversos sabores.</p>
-          </div>
-        </div>
-        
-        <!-- Card 2 -->
-        <div class="card">
-          <img src="pão doce.jpg" class="card-img-top" alt="Card image 2">
-          <div class="card-body">
-            <h5 class="card-title">Pão doce</h5>
-            <p class="card-text">Diversos pão de otima qualidade.</p>
-          </div>
-        </div>
+        <div class="card-columns">
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="foto 2.jpg" class="card-img-top" alt="Card image 1">
+                <div class="card-body">
+                    <h5 class="card-title">Esfirra</h5>
+                    <p class="card-text">Muito gostosas e tem diversos sabores.</p>
+                    <button class="btn-buy" onclick="addToCart('Esfirra')">Comprar</button>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="pão doce.jpg" class="card-img-top" alt="Card image 2">
+                <div class="card-body">
+                    <h5 class="card-title">Pão doce</h5>
+                    <p class="card-text">Diversos pães de ótima qualidade.</p>
+                    <button class="btn-buy" onclick="addToCart('Pão doce')">Comprar</button>
+                </div>
+            </div>
 
-        <!-- Card 3 -->
-        <div class="card">
-          <img src="bolos.jpg" class="card-img-top" alt="Card image 3">
-          <div class="card-body">
-            <h5 class="card-title">Bolos</h5>
-            <p class="card-text">Texto do card 3.</p>
-          </div>
-        </div>
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="bolos.jpg" class="card-img-top" alt="Card image 3">
+                <div class="card-body">
+                    <h5 class="card-title">Bolos</h5>
+                    <p class="card-text">Bolos fresquinhos para todas as ocasiões.</p>
+                    <button class="btn-buy" onclick="addToCart('Bolos')">Comprar</button>
+                </div>
+            </div>
 
-        <!-- Card 4 -->
-        <div class="card">
-          <img src="croachan.jpg" class="card-img-top" alt="Card image 4">
-          <div class="card-body">
-            <h5 class="card-title">Croissant</h5>
-            <p class="card-text">Comida chique</p>
-          </div>
-        </div>
+            <!-- Card 4 -->
+            <div class="card">
+                <img src="croachan.jpg" class="card-img-top" alt="Card image 4">
+                <div class="card-body">
+                    <h5 class="card-title">Croissant</h5>
+                    <p class="card-text">Comida chique e deliciosa.</p>
+                    <button class="btn-buy" onclick="addToCart('Croissant')">Comprar</button>
+                </div>
+            </div>
 
-        <!-- Card 5 -->
-        <div class="card">
-          <img src="biscoito de goiabada.jpg" class="card-img-top" alt="Card image 5">
-          <div class="card-body">
-            <h5 class="card-title">Biscoito de goiabada</h5>
-            <p class="card-text">Goiabada derretida.</p>
-          </div>
+            <!-- Card 5 -->
+            <div class="card">
+                <img src="biscoito de goiabada.jpg" class="card-img-top" alt="Card image 5">
+                <div class="card-body">
+                    <h5 class="card-title">Biscoito de Goiabada</h5>
+                    <p class="card-text">Goiabada derretida no meio.</p>
+                    <button class="btn-buy" onclick="addToCart('Biscoito de Goiabada')">Comprar</button>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
+
+    <!-- Carrinho -->
+    <div class="cart-container">
+        <h3>Itens no Carrinho</h3>
+        <ul id="cart-list" class="cart-list"></ul>
     </div>
 
     <!-- Rodapé -->
     <footer>
-      <p>&copy; 2025 Todos os direitos reservados. Meu site - Desenvolvido com <3</p>
+        <p>&copy; 2025 Todos os direitos reservados. Meu site - Desenvolvido com <3</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Ícones Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+        let cart = [];
+
+        function addToCart(item) {
+            cart.push(item);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartCount = document.getElementById("cart-count");
+            const cartList = document.getElementById("cart-list");
+
+            // Atualiza a contagem no ícone do carrinho
+            cartCount.textContent = cart.length;
+
+            // Exibe os itens do carrinho
+            cartList.innerHTML = '';
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('cart-item');
+                listItem.textContent = item;
+                cartList.appendChild(listItem);
+            });
+        }
+
+        // Função para redirecionar para a página de checkout
+        function goToCart() {
+            if (cart.length > 0) {
+                // Simula redirecionamento para página de checkout
+                window.location.href = "checkout.html";  // Redireciona para página de compra (checkout)
+            } else {
+                alert("Carrinho vazio. Adicione itens para continuar.");
+            }
+        }
+    </script>
 </body>
 </html>
